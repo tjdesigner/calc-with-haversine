@@ -1,5 +1,5 @@
 {
-  "name": "Calc Haversine",
+  "name": "calc_haversine",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
