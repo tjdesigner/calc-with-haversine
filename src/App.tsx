@@ -36,7 +36,7 @@ const App: React.FC = () => {
     setDistancia(result) 
   },[datas]);
   
-  const handleSubmit: SubmitHandler<FormData> = useCallback(async (data) => {
+  const handleSubmit: SubmitHandler<FormData> = useCallback((data) => {
     mylocation(data)
     setDatas(data)
   }, [mylocation]);
@@ -51,19 +51,19 @@ const App: React.FC = () => {
     <div className="App">
         <h1>Calcule a distância em linha reta entre dois pontos</h1>
         <Form ref={formRef} onSubmit={handleSubmit}>
-         <label>Coordenadas da primeira referêcia</label>
+         <label>Coordenadas da primeira referência</label>
          <p>
           <Input name="lat1" placeholder="Latitude 1"/>
           <Input name="long1" placeholder="Longitude 1"/>
          </p>
-         <label>Coordenadas da Segunda referêcia</label>
+         <label>Coordenadas da Segunda referência</label>
           <p>
           <Input name="lat2" placeholder="Latitude 2"/>
           <Input name="long2" placeholder="Longitude 2"/>
           </p>
           <button className="App-link" type="submit">CALCULAR</button>
         </Form>
-        { distancia > 0 ? <h2>{distancia} Km </h2> : <h2>0 Km</h2>}
+        { distancia > 0 ? <h2>{distancia.toFixed(2)} Km </h2> : <h2>0 Km</h2>}
     </div>
   );
 }
