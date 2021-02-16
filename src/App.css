@@ -2,8 +2,13 @@ body {
   background-color: #282c34;
   color: #f1f1f1;
 }
+h2 > b {
+  color: #0eaf47;
+  text-transform: inherit;
+  text-transform: uppercase;
+}
 
-.App {
+div.App {
   margin: 0 auto;
   text-align: center;
   width: auto;
@@ -25,15 +30,11 @@ body {
   }
 }
 
-h1 {
-  margin: 0 0 32px;
-}
+
 
 label {
   color: #7988a7;
-  border: solid 1px #7988a7;
   padding: 4px 16px;
-  border-radius: 100px;
 }
 
 p {
@@ -65,6 +66,47 @@ button.App-link {
 
 button.App-link:hover {
   background: #19da5e;
+}
+
+p > code > a {
+  display: flex;
+}
+
+code {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+  background: transparent;
+  align-items: center;
+}
+
+a.google {
+  width: auto;
+  color: #0eaf47;
+  text-transform: none;
+  text-decoration: none;
+  border: solid 1px;
+  padding: 4px 8px;
+  border-radius: 100px;
+  transition: all 0.2s;
+  margin-left: 8px;
+}
+
+code > a:hover {
+  background: #161c27;
+}
+
+a.git {
+  margin-top: 16px;
+  color: #757575;
+  text-transform: none;
+  text-decoration: none;
+  border: solid 1px;
+  padding: 4px 8px;
+  border-radius: 100px;
+  transition: all 0.2s;
+  margin-left: 8px;
 }
 
 .App-link-desable {
