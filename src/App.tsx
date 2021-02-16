@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './App.css';
 
 import { SubmitHandler, FormHandles } from '@unform/core';
@@ -17,14 +17,9 @@ interface FormData {
 const App: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [datas, setDatas] = useState({});
-  const [status, setStatus] = useState(false);
   const [distancia, setDistancia] = useState(0);
 
-  console.log(status);
-
   const mylocation = useCallback((d: any) => {
-    setDatas(datas)
-    console.log(datas);
     d= datas;
     const points = [
       {
@@ -36,22 +31,21 @@ const App: React.FC = () => {
           longitude: d.long2 
       }
     ];
-    console.log(points);
-    
+
     let result = HaversineGeolocation.getDistanceBetween(points[0], points[1]);
     setDistancia(result) 
   },[datas]);
   
-  const handleSubmit: SubmitHandler<FormData> = useCallback((data) => {
+  const handleSubmit: SubmitHandler<FormData> = useCallback(async (data) => {
+    mylocation(data)
     setDatas(data)
-    setStatus(true);
-    if(status) {
-      mylocation(data)
-    }
-  }, [mylocation, status]);
+  }, [mylocation]);
 
   console.log('A Q U I', {datas});
-  
+
+  useEffect(() => {
+    mylocation(distancia);
+  }, [distancia, mylocation])
 
   return (
     <div className="App">
@@ -69,7 +63,7 @@ const App: React.FC = () => {
           </p>
           <button className="App-link" type="submit">CALCULAR</button>
         </Form>
-        {status && <h2>{distancia} Km</h2>}
+        { distancia > 0 ? <h2>{distancia} Km </h2> : <h2>0 Km</h2>}
     </div>
   );
 }
