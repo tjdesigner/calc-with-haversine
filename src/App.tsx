@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import { SubmitHandler, FormHandles } from '@unform/core';
