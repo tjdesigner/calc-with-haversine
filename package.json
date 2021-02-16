@@ -1,5 +1,5 @@
 {
-  "name": "testes",
+  "name": "Calc Haversine",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,11 +10,15 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@unform/core": "^2.1.5",
+    "@unform/web": "^2.1.5",
+    "haversine-geolocation": "^1.5.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.2",
     "typescript": "^4.1.2",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",
