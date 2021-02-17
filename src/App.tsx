@@ -18,16 +18,11 @@ const App: React.FC = () => {
 
   const haversineFn = (lat1: number, lon1: number, lat2: number, lon2: number) => {
 
-    let la1 = lat1;
-    let la2 = lat2;
-    let lo1 = lon1;
-    let lo2 = lon2;
-
     const R = 6371e3; // metres
-    const φ1 = la1 * Math.PI/180; // φ, λ in radians
-    const φ2 = la2 * Math.PI/180;
-    const Δφ = (la2-la1) * Math.PI/180;
-    const Δλ = (lo2-lo1) * Math.PI/180;
+    const φ1 = lat1 * Math.PI/180; // φ, λ in radians
+    const φ2 = lat2 * Math.PI/180;
+    const Δφ = (lat2-lat1) * Math.PI/180;
+    const Δλ = (lon2-lon1) * Math.PI/180;
 
     const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
               Math.cos(φ1) * Math.cos(φ2) *
@@ -39,15 +34,9 @@ const App: React.FC = () => {
   };
 
   const mylocation = useCallback((d: any) => {
-
-    d.lat1 = d.latLon1.substring(0, 18);
-    d.lon1 = d.latLon1.substring(20, 38);
-    d.lat2 = d.latLon2.substring(0, 18);
-    d.lon2 = d.latLon2.substring(20, 38);
-    
-    const result = haversineFn(d.lat1, d.lon1, d.lat2, d.lon2);
-    let resCalc = result.toString().substring(0 ,3)
-    setDistancia(resCalc);
+    const result = haversineFn(d.latLon1.substring(0, 10), d.latLon1.substring(20, 30), d.latLon2.substring(0, 10), d.latLon2.substring(20, 30));
+    let resCalc = result.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.').substring(0,5).replace('.', ',');
+    setDistancia(resCalc)
   },[]);
   
   const handleSubmit: SubmitHandler<FormData> = useCallback((data) => {
@@ -62,15 +51,15 @@ const App: React.FC = () => {
             <code>Busque os pontos através do <a className="google" href="https://www.google.com.br/maps" target="blank">Google Maps</a></code>
           </p>
           <Form ref={formRef} onSubmit={handleSubmit}>
-          <label>Insira latitude e longitude de cada ponto</label>
+          <label>Cole em cada campo (Latitude e Longitude) dos pontos origem e destino.</label>
           <p>
-            <Input name="latLon1" placeholder="Latitude e Longitude pronto 1"/>
-            <Input name="latLon2" placeholder="Longitude e Longitude pronto 2"/>
+            <Input name="latLon1" placeholder="-15.804065, -47.931580"/>
+            <Input name="latLon2" placeholder="-23.565168, -46.646180"/>
           </p>
             <button className="App-link" type="submit">CALCULAR</button>
           </Form>
           { distancia !== '0' ? <h2>{distancia} Km </h2> : <h2>0 Km</h2>}
-          <code><a className="git" href="https://github.com/tjdesigner/calc-with-haversine" target="blank">GitHub | TJDesigner</a></code>
+          <code><a className="git" href="https://github.com/tjdesigner/calc-with-haversine" target="blank">GitHub</a></code>
       </div>
     </>
   );
