@@ -5,13 +5,6 @@ import { SubmitHandler, FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import Input from './components/Input';
 
-interface FormData {
-  lat1: string;
-  lon1: string;
-  lat2: string;
-  lon2: string;
-}
-
 const App: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const [distancia, setDistancia] = useState('0');
@@ -39,7 +32,7 @@ const App: React.FC = () => {
     setDistancia(resCalc)
   },[]);
   
-  const handleSubmit: SubmitHandler<FormData> = useCallback((data) => {
+  const handleSubmit: SubmitHandler = useCallback((data) => {
     mylocation(data);
   }, [mylocation]);
 
