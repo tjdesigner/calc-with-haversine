@@ -27,7 +27,11 @@ const App: React.FC = () => {
   };
 
   const mylocation = useCallback((d: any) => {
-    const result = haversineFn(d.latLon1.substring(0, 10), d.latLon1.substring(20, 30), d.latLon2.substring(0, 10), d.latLon2.substring(20, 30));
+    let lat1 = d.latLon1.substring(0, 10).replace(',', '.');
+    let lat2 = d.latLon1.substring(20, 30).replace(',', '.');
+    let lon1 = d.latLon2.substring(0, 10).replace(',', '.');
+    let lon2 = d.latLon2.substring(20, 30).replace(',', '.');
+    const result = haversineFn(lat1, lon1, lat2, lon2);
     let resCalc = result.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.').substring(0,5).replace('.', ',');
     setDistancia(resCalc)
   },[]);
